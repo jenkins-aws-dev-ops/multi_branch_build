@@ -1,0 +1,4 @@
+g++ -fprofile-arcs -ftest-coverage -fPIC -O0 test.cc -o test
+./test
+lcov -c -d . -o coverage
+genhtml -o ./html coverage

@@ -1,0 +1,6 @@
+/usr/local/Cellar/gcc/11.2.0_2/bin/g++-11 -fprofile-arcs -ftest-coverage test.cc -o test
+ 1779  gcov test.cc
+ 1796  lcov -t result -o test -c -d .
+ 1798  genhtml -o test
+ 1799  genhtml -o res test
+

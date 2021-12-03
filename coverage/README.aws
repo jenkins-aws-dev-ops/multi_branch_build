@@ -1,0 +1,5 @@
+#ssh -i kenvin.pem ec2-user@ec2-52-14-27-85.us-east-2.compute.amazonaws.com 
+ssh -i kenvin.pem -t ec2-user@ec2-52-14-27-85.us-east-2.compute.amazonaws.com "/usr/bin/g++ -fprofile-arcs -ftest-coverage test.cc -o test; lcov -t result -o test -c -d .; genhtml -o test ; genhtml -o res test"
+
+Copy file from MacOS term to AWS linux instance
+scp -i kenvin.pem README ec2-user@ec2-52-14-27-85.us-east-2.compute.amazonaws.com:/home/ec2-user/
