@@ -6,7 +6,7 @@ pipeline {
         text(name: 'enter path',
         defaultValue: 'somedefault path')
         string(name: 'branch',
-        defaultValue: 'main')
+        defaultValue: 'main1')
     }
     stages {
         stage('Parallel jobs') {
