@@ -2,8 +2,8 @@ def raiseIt(method):
     def inner(name_ref):
         print(f'A: {name_ref.sal} {name_ref.name.upper()}')
         a = name_ref.sal
-        for i in range(a):
-            print(i)
+        #for i in range(a):
+        #    print(i)
     return inner
 
 
