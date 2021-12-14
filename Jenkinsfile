@@ -20,7 +20,7 @@ pipeline {
                 stage('Installation Preparation') {
                     steps {
                         sleep 1
-                        sh '/usr/bin/python3 testP.py'
+                        sh '/usr/bin/python3 python/testP.py'
                     }
                 }
             }
@@ -41,13 +41,13 @@ pipeline {
                 stage('Suite 2') {
                     steps {
                         sleep 1
-                        sh '/usr/bin/python3 testP.py'
+                        sh '/usr/bin/python3 python/testP.py'
                     }
                 }
                 stage('Suite 3') {
                     steps {
                         sleep 1
-                        sh '/usr/bin/python3 testP.py'
+                        sh '/usr/bin/python3 python/testP.py'
                     }
                 }
             }
