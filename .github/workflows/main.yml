@@ -1,5 +1,5 @@
 jobs:
    call-workflow-passing-data:
-      uses: multi_branch_build/.github/workflows/runner.yml@main
+      uses: ./runner.yml
    with:
       username: tri
