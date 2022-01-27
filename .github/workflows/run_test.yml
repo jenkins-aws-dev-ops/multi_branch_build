@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   job1:
-    uses: multi_branch_build/.github/workflows/test.yml@main
+    uses: multi_branch_build/.github/workflows/test.yml@v1
 
   job2:
     runs-on: ubuntu-latest
