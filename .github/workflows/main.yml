@@ -6,6 +6,6 @@ on:
         -main
 jobs:
    call-workflow-passing-data:
-      uses: multi_branch_build/.github/workflows/runner.yml@main
+      uses: multi_branch_build/.github/workflows/test.yml@main
       with:
          username: tri
