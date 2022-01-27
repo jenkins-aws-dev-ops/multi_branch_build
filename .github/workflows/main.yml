@@ -1,5 +1,11 @@
+name: Build terraform
+
+on:
+  push:
+     branches:
+        -main
 jobs:
    call-workflow-passing-data:
-      uses: ./runner.yml
-   with:
-      username: tri
+      uses: multi_branch_build/.github/workflows/runner.yml@main
+      with:
+         username: tri
