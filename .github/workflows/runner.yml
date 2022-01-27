@@ -4,14 +4,16 @@ name: CI
 
 # Controls when the workflow will run
 on:
+  workflow_call:
+     inputs:
+        username :
+           required: true
+           type: string
   # Triggers the workflow on push or pull request events but only for the Nightly branch
   push:
     branches: [ Nightly ]
   pull_request:
     branches: [ Nightly ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
