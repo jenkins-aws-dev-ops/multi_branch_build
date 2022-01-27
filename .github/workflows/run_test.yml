@@ -6,7 +6,7 @@ on:
       - main
 jobs:
   job1:
-    uses: https://github.com/kenvin007/multi_branch_build/edit/Nightly/.github/workflows/test.yml@main
+    uses: https://github.com/kenvin007/multi_branch_build/.github/workflows/test.yml@main
 
   job2:
     runs-on: ubuntu-latest
