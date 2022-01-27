@@ -6,7 +6,7 @@ name: CI
 on:
   workflow_call:
      inputs:
-        username :
+        username:
            required: true
            type: string
   # Triggers the workflow on push or pull request events but only for the Nightly branch
