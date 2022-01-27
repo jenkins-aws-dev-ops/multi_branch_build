@@ -1,8 +1,9 @@
 name: Call a reusable workflow and use its outputs
 
 on:
-  workflow_dispatch:
-
+   pull_request:
+    branches:
+      - main
 jobs:
   job1:
     uses: multi_branch_build/.github/workflows/test.yml@main
