@@ -14,7 +14,6 @@ jobs:
       - run:  |
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            echo "abc=$file_content" >> $GITHUB_ENV
-      - run: echo "::set-output name=version_number::1.2.3"
       - run: echo "${{ env.abc }}"
       - name: List files in the repository
         run: |
@@ -24,5 +23,5 @@ jobs:
    runs-on: ubuntu-latest
    needs: Explore-GitHub-Actions
    steps:
-      - run: echo "$version_number"
+      - run: echo "${{ env.abc }}"
    
