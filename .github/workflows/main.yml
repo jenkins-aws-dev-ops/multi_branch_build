@@ -30,8 +30,7 @@ jobs:
       - id: set-matrix
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
-           echo "abc=$file_content" >> $GITHUB_ENV
-           echo ${{ env.abc }}
+           echo "$file_content"
            echo "::set-output name=matrix::{\"node\":[10, 12, 14]}"
   test:
     needs: build
