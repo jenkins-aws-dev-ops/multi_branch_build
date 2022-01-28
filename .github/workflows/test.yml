@@ -14,12 +14,15 @@ jobs:
       - run:  |
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            echo "abc=$file_content" >> $GITHUB_ENV
-      - run: echo "${{ env.abc }}"
+      - run: |
+           echo "${{ env.abc }}"
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   Run-Smoke:
+   strategy:
+   matrix: [a, b, c]
    runs-on: ubuntu-latest
    needs: Explore-GitHub-Actions
    steps:
