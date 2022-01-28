@@ -3,23 +3,28 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    steps:     
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: cat ${{ github.workspace }}/.github/workflows/sample
-      - run:  |
-           file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
-           echo "abc=$file_content" >> $GITHUB_ENV
-      - run: |
-           echo "${{ env.abc }}"
-      - name: List files in the repository
-        run: |
+    outputs:
+      matr : ${{ steps.set-matrix.outputs.matr }}
+    steps:   
+    - id: set-matrix
+      run: |
+         echo "🎉 The job was automatically triggered by a ${{ github.event_name }}"
+         echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+         echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+    - name: Check out repository code
+      uses: actions/checkout@v2
+      run: |
+        echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+        cat ${{ github.workspace }}/.github/workflows/sample
+        file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
+        echo "abc=$file_content" >> $GITHUB_ENV
+        echo "::set-output name=matr::$file_content"
+        echo "${{ env.abc }}"
+    - name: List files in the repository
+        run | 
           ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          echo "🍏 This job's status is ${{ job.status }}."
+    
   Run-Smoke:
    strategy:
      max-parallel: 1
@@ -28,5 +33,5 @@ jobs:
    runs-on: ubuntu-latest
    needs: Explore-GitHub-Actions
    steps:
-      - run: echo "${{ matrix.tests }}"
+      - run: echo "${{ matrix.tests }} ${{ needs.job1.outputs.matr  }}"
    
