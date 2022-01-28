@@ -25,11 +25,11 @@ jobs:
     steps: 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - id: set-matrix
-        run: echo "::set-output name=matrix::ttt"
+        run: echo "::set-output name=matrix::{\"node\":[10, 12, 14]}"
   test:
     needs: build
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ needs.build.outputs.matrix }}
+      matrix: ${{fromJSON(needs.build.outputs.matrix)}}
     steps:
       - run: echo "hello"
