@@ -31,6 +31,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
 			# This needs to match the first job's name and output parameter
-      matrix: ${{needs.build.outputs.matrix}}
+      matrix: ${{ needs.build.outputs.matrix }}
     steps:
       - run: echo "hello"
