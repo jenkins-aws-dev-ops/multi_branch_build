@@ -38,5 +38,6 @@ jobs:
     strategy:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}}
+    if: contains(matrix.node. 'test2')
     steps:
-      - run: '["${{matrix.node}}"] = "test2" && exit 1'
+      - run: echo "${{matrix.node}}"
