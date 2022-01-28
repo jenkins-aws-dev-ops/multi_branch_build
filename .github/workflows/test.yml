@@ -13,10 +13,9 @@ jobs:
       - run: cat ${{ github.workspace }}/.github/workflows/sample
       - run: echo "action_state=yellow" >> $GITHUB_ENV
       - run: echo "${{ env.action_state }}"
-      - run: |
-           TESTS=`cat ${{ github.workspace }}/.github/workflows/sample`
-      - run: 
-           echo "$TESTS"
+      - run: file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
+      - run: echo "act=$file_content" >> $GITHUB_ENV
+      - run: echo "${{ env.act }}"
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
