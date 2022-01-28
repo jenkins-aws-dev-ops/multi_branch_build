@@ -13,7 +13,7 @@ jobs:
       - run: cat ${{ github.workspace }}/.github/workflows/sample
       - run: |
            TESTS=$(cat ${{ github.workspace }}/.github/workflows/sample)
-      - run: echo $TESTS
+      - run: echo "${{ TESTS }}" 
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
