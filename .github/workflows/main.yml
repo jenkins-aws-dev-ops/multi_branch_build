@@ -26,8 +26,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - id: set-matrix
         run: | 
-           file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
-           echo "abc=$file_content" >> $GITHUB_ENV
+           #file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
+           #echo "abc=$file_content" >> $GITHUB_ENV
+           ls ${{ github.workspace }}/.github/workflows
            echo "::set-output name=matrix::{\"node\":[10, 12, 14]}"
   test:
     needs: build
