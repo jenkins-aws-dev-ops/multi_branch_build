@@ -25,7 +25,7 @@ jobs:
     steps: 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - id: set-matrix
-        run: echo "::set-output name=matrix::['10', '12', '14']"
+        run: echo "::set-output name=matrix::ttt"
   test:
     needs: build
     runs-on: ubuntu-latest
