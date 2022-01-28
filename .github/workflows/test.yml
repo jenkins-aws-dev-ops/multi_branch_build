@@ -13,7 +13,8 @@ jobs:
       - run: cat ${{ github.workspace }}/.github/workflows/sample
       - run:  |
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
-           echo "$file_content"
+           echo "abc=$file_content" >> $GITHUB_ENV
+      - run: echo "${{ env.abc }}"
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
