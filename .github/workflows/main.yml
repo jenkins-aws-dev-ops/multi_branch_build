@@ -39,4 +39,6 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}}
     steps:
-      - run: echo "${{matrix.node}}"
+      - run: |
+          echo "${{matrix.node}}"
+          ls junk
