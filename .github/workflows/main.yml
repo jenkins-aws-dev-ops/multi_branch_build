@@ -31,7 +31,8 @@ jobs:
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            echo "$file_content"
-           echo "::set-output name=matrix::{\"node\":[$file_content]}"
+           echo "::set-output name=matrix::{\"node\":\[$file_content\]}"
+           #echo "::set-output name=matrix::{\"node\":[x, y, z]}"
   test:
     needs: build
     runs-on: ubuntu-latest
