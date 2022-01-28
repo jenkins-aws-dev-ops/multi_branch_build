@@ -25,6 +25,7 @@ jobs:
     steps: 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - id: set-matrix
+        uses: actions/checkout@v2
         run: | 
            #file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            #echo "abc=$file_content" >> $GITHUB_ENV
