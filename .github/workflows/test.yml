@@ -22,5 +22,5 @@ jobs:
   Run-Smoke:
    runs-on: ubuntu-latest
    steps:
-      - run: echo "hello"
+      - run: echo "${{ env.abc }}"
    
