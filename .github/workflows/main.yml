@@ -28,7 +28,7 @@ jobs:
         run: | 
            #file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            #echo "abc=$file_content" >> $GITHUB_ENV
-           ls ${{ github.workspace }}/.github/workflows
+           ls ${{ github.workspace }}
            echo "::set-output name=matrix::{\"node\":[10, 12, 14]}"
   test:
     needs: build
