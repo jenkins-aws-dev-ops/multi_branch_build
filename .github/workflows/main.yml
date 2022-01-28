@@ -29,7 +29,7 @@ jobs:
            #file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            #echo "abc=$file_content" >> $GITHUB_ENV
            abc=`pwd`
-           echo $abc
+           cat $abc/.github/workflows/sample
            echo "::set-output name=matrix::{\"node\":[10, 12, 14]}"
   test:
     needs: build
