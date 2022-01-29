@@ -40,6 +40,6 @@ jobs:
       matrix: ${{fromJSON(needs.build.outputs.matrix)}}
     steps:
       - run: |
-          if [ ${{matrix.node}} = "test2" ] then
+          if [ "${{matrix.node}}" = "test2" ] then
              ls junk
           fi
