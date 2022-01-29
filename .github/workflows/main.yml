@@ -37,9 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 1
-      matrix: ${{fromJSON(needs.build.outputs.matrix)}}
+      matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
+      if: ${{matrix.node" == "test2" }}
     steps:
       - run: |
-          if [ "${{matrix.node}}" = "test2" ] then
-             ls junk
-          fi
+          echo "${{matrix.node}}"
