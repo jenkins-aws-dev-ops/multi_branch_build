@@ -38,7 +38,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
-      if: ${{matrix.node" == "test2" }}
+    if: ${{matrix.node" == "test2" }}
     steps:
       - run: |
           echo "${{matrix.node}}"
