@@ -47,7 +47,7 @@ jobs:
            sleep 1
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
-           lines=`ps -ef`
+           lines=`echo $$`
            echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
            ls junk
       - if: ${{ failure() }}
