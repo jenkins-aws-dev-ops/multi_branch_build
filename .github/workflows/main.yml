@@ -53,6 +53,6 @@ jobs:
           name: Build failure logs
           path: ${{ runner.temp }}/build_log
         env:
-          PREV_FAIL: ${{ matrix.node }}
+           PREV_FAIL: true
           
            
