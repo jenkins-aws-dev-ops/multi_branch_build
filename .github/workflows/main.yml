@@ -45,14 +45,12 @@ jobs:
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
            echo "No junk file"  >> ${{ runner.temp }}/build_log
-           echo " ${{ PREV_FAIL }} >> ${{ runner.temp }}/build_log
+           echo " ${{ steps.matrix_ele.prev_run }} >> ${{ runner.temp }}/build_log
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
           name: Build failure logs
           path: ${{ runner.temp }}/build_log
-        env:
-           PREV_FAIL: true
-          
-           
+      - name: matrix_ele:
+          echo "::set-output name=prev_run::${{ matrix.node }}"
