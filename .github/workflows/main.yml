@@ -44,6 +44,7 @@ jobs:
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
            echo "No junk file"  >> ${{ runner.temp }}/build_log
+           ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
