@@ -49,5 +49,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Build failure logs
-          path: ${{ runner.temp }}/build_logs
+          path: ${{ runner.temp }}/build_log
+          
            
