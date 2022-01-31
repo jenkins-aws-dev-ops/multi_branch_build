@@ -36,6 +36,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: true
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
