@@ -50,8 +50,5 @@ jobs:
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
-          name: Build failure logs
+          name: build-fail
           path: ${{ runner.temp }}/build_log
-      - name: matrix_ele
-        run: |
-          echo "::set-output name=prev_run::${{ matrix.node }}"
