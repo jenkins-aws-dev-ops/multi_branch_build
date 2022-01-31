@@ -51,6 +51,7 @@ jobs:
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
+      - id: reset_env
         env: 
           test-failed: "true"
         with:
