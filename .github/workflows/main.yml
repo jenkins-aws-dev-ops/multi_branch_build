@@ -42,6 +42,7 @@ jobs:
     steps:
       - if: ${{ matrix.node == 'test2' }}
         run: |
+           sleep 10
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
            echo "No junk file"  >> ${{ runner.temp }}/build_log
