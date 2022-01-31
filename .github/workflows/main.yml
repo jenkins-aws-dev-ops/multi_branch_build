@@ -53,4 +53,5 @@ jobs:
           name: Build failure logs
           path: ${{ runner.temp }}/build_log
       - name: matrix_ele
+        run: |
           echo "::set-output name=prev_run::${{ matrix.node }}"
