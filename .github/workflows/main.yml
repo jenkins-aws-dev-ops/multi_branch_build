@@ -51,6 +51,9 @@ jobs:
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
+        env: 
+          test-failed: "true"
         with:
           name: build-fail
           path: ${{ runner.temp }}/build_log
+      
