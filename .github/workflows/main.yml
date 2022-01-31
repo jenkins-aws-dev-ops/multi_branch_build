@@ -47,7 +47,8 @@ jobs:
            sleep 1
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
-           echo "${{ env.test-failed }} No junk file in ${{ matrix.node }}"  >> ${{ runner.temp }}/build_log
+           lines=`ps aux -c | grep "$1" | sed -e 's/^[^0-9]*\([0-9]*\).*/\1/g'`
+           echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
