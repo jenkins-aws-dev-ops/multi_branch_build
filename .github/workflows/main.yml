@@ -42,15 +42,13 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
-      - if: ${{ matrix.node == 'test2' }} && ${{ env.test-failed }} != "true"
+      - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
            echo "${{ env.test-failed }} No junk file in ${{ matrix.node }}"  >> ${{ runner.temp }}/build_log
            ls junk
-           env:
-              test-failed: "true"
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
