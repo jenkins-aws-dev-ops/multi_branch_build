@@ -43,4 +43,9 @@ jobs:
         run: |
            echo "${{matrix.node}}"
            ls junk
-           exit
+      - if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build failure logs
+          path: ${{ runner.temp }}/build_logs
+           
