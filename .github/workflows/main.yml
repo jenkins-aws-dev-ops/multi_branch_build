@@ -35,6 +35,8 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
+    env:
+      test-failed: "false"
     strategy:
       fail-fast: true
       max-parallel: 1
@@ -45,7 +47,7 @@ jobs:
            sleep 1
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
-           echo "No junk file in ${{ matrix.node }}"  >> ${{ runner.temp }}/build_log
+           echo "${{ env.test-failed }} No junk file in ${{ matrix.node }}"  >> ${{ runner.temp }}/build_log
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
