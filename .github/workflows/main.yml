@@ -45,7 +45,7 @@ jobs:
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
            echo "No junk file"  >> ${{ runner.temp }}/build_log
-           echo " ${{ steps.matrix_ele.prev_run }} >> ${{ runner.temp }}/build_log
+           echo " ${{ github.job }} >> ${{ runner.temp }}/build_log
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
