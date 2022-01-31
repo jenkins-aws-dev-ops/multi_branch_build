@@ -43,19 +43,19 @@ jobs:
     steps:
       - if: ${{ matrix.node != 'test2' }}
         run: |
-           "echo ${{matrix.node }}" 
-           "cat prev_val"
+           "echo ${{matrix.node }}"
       - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
            echo "${{matrix.node}}"
            touch ${{ runner.temp }}/build_log
            lines=`echo $$`
-           echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
+           echo "No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
+          name: build-failed
           path: ${{ runner.temp }}/build_log
           
       
