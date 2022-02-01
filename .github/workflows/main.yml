@@ -41,7 +41,7 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
-      - if: $ {{ success() }}
+      - if: ${{ success() }}
         run: |
            echo " Run: ${{ matrix.node }} "
       - if: ${{ matrix.node == 'test2' }}
