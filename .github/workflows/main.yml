@@ -39,9 +39,11 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
+      - name: run matrix
+        id: run-element
       - if: ${{ success() }}
         run: |
-           echo " Run: ${{ matrix.node }} ${{ env.test-failed }} "
+           echo " Run: ${{ matrix.node }} ${{ env.test-failed }} ${{ steps.run-element.outputs.test-status }} "
       - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
@@ -51,8 +53,8 @@ jobs:
            echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
            ls junk
       - if: ${{ failure() }}
-        env: 
-           test-failed: "true"
+           echo "::set-output name=test-status::'failed'"
+      - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
           name: build-fail
