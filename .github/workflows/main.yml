@@ -34,8 +34,6 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      test-failed: "false"
     strategy:
       fail-fast: false
       max-parallel: 1
@@ -53,8 +51,6 @@ jobs:
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
-        env: 
-           test-failed: "true"
         with:
           name: build-fail
           path: ${{ runner.temp }}/build_log
