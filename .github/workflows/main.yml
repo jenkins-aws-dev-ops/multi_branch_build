@@ -43,7 +43,7 @@ jobs:
         id: run-element
       - if: ${{ success() }}
         run: |
-           echo " Run: ${{ matrix.node }} ${{ env.test-failed }} ${{ steps.run-element.outcome }} "
+           echo " Run: ${{ matrix.node }} ${{ env.test-failed }} "
       - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
