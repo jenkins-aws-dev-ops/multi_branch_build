@@ -43,7 +43,7 @@ jobs:
     steps:
       - if: ${{ success() }}
         run: |
-           echo " Run: ${{ matrix.node }} "
+           echo " Run: ${{ matrix.node }} ${{ env.test-failed }} "
       - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
