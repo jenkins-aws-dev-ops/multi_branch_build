@@ -24,7 +24,9 @@ jobs:
       uses: actions/checkout@v2
     steps: 
       - name: test1
+        uses: actions/checkout@v2
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - id: set-matrix
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            echo "$file_content"
@@ -37,5 +39,5 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
-      run: |
-          echo "hello"
+      - name: mtx
+        run: "echo ${{matrix.node }}" 
