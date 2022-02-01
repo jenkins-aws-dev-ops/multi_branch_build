@@ -34,18 +34,15 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    outputs:
-       test-status: ${{ steps.run-matrix.outputs.matrix-run }}
+    env:
+      test-failed: "false"
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
-      - name: run matrix
-        id: run-matrix
-      - if: ${{ success() }}
-        run: |
-           echo " Run: ${{ matrix.node }}"
+      - if: ${{ matrix.node != 'test2' }}
+        run: "echo ${{matrix.node }} echo ${{ env.test-failed }}" 
       - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
@@ -56,7 +53,10 @@ jobs:
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
+        env: 
+           test-failed: "true"
         with:
           name: build-fail
           path: ${{ runner.temp }}/build_log
           
+      
