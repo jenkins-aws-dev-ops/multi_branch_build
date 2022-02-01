@@ -34,13 +34,13 @@ jobs:
   test:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      test-failed: "false"
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
+      - env:
+         test-failed: "false"
       - if: ${{ success() }}
         run: |
            echo " Run: ${{ matrix.node }} ${{ env.test-failed }} "
