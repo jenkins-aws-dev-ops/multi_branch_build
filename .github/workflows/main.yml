@@ -30,7 +30,6 @@ jobs:
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            echo "$file_content"
-           pwd
            echo "::set-output name=matrix::{\"node\":[$file_content]}"
   test:
     needs: build
@@ -43,8 +42,7 @@ jobs:
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
       - if: ${{ matrix.node != 'test2' }}
-        run: |
-            "echo ${{matrix.node }} echo ${{ env.test-failed }}"
+        run: "echo ${{matrix.node }} echo ${{ env.test-failed }}" 
       - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
@@ -55,8 +53,8 @@ jobs:
            ls junk
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
+        env: 
+           test-failed: "true"
         with:
           name: build-fail
           path: ${{ runner.temp }}/build_log
-          
-      
