@@ -1,0 +1,56 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the Nightly branch
+  push:
+    branches: [ Nightly ]
+  pull_request:
+    branches: [ Nightly ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+      uses: actions/checkout@v2
+    steps: 
+      - name: test1
+        uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - id: set-matrix
+        run: | 
+           file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
+           echo "$file_content"
+           echo "::set-output name=matrix::{\"node\":[$file_content]}"
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
+    steps:
+      - if: ${{ matrix.node != 'test2' }}
+        run: "echo ${{matrix.node }} echo ${{ env.test-failed }}" 
+      - if: ${{ matrix.node == 'test2' }}
+        run: |
+           sleep 1
+           echo "${{matrix.node}}"
+           touch ${{ runner.temp }}/build_log
+           lines=`echo $$`
+           echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
+           ls junk
+      -  if: ${{ failure() }}
+         uses: actions/upload-artifact@v2
+         with:
+          name: build-fail
+          path: ${{ runner.temp }}/build_log
