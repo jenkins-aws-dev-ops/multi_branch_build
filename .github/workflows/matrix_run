@@ -26,7 +26,6 @@ jobs:
       - name: test1
         uses: actions/checkout@v2
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - id: set-matrix
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            echo "$file_content"
@@ -39,18 +38,5 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
-      - if: ${{ matrix.node != 'test2' }}
-        run: "echo ${{matrix.node }} echo ${{ env.test-failed }}" 
-      - if: ${{ matrix.node == 'test2' }}
-        run: |
-           sleep 1
-           echo "${{matrix.node}}"
-           touch ${{ runner.temp }}/build_log
-           lines=`echo $$`
-           echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
-           ls junk
-      -  if: ${{ failure() }}
-         uses: actions/upload-artifact@v2
-         with:
-          name: build-fail
-          path: ${{ runner.temp }}/build_log
+      run: |
+          echo "hello"
