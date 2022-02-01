@@ -52,9 +52,8 @@ jobs:
            lines=`echo $$`
            echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
            ls junk
-      - if: ${{ failure() }}
-        run: |
            echo "::set-output name=test-status::'failed'"
+           exit 1
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
