@@ -52,10 +52,10 @@ jobs:
            lines=`echo $$`
            echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
            ls junk
+           env:
+              test-failed: "true"
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
-        env: 
-           test-failed: "true"
         with:
           name: build-fail
           path: ${{ runner.temp }}/build_log
