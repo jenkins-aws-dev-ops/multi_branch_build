@@ -43,7 +43,7 @@ jobs:
         id: run-element
       - if: ${{ success() }}
         run: |
-           echo " Run: ${{ matrix.node }} ${{ env.test-failed }} ${{ steps.run-element.outputs.test-status }} "
+           echo " Run: ${{ matrix.node }} ${{ env.test-failed }} ${{ steps.run-element.outcome }} "
       - if: ${{ matrix.node == 'test2' }}
         run: |
            sleep 1
@@ -52,8 +52,8 @@ jobs:
            lines=`echo $$`
            echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
            ls junk
-           echo "::set-output name=test-status::'failed'"
-           exit 1
+           #echo "::set-output name=test-status::'failed'"
+           #exit 1
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
