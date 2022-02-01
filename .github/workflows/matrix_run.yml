@@ -42,7 +42,7 @@ jobs:
       - name: Run matrix
         id: mtx
         run:  |
-            "echo ${{matrix.node }}" 
+            echo ${{matrix.node }}
             if [ ${{matrix.node}} == "test2" ] then
                 ls junk
             fi
