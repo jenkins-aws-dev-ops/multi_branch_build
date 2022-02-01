@@ -30,6 +30,7 @@ jobs:
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            echo "$file_content"
+           pwd
            echo "::set-output name=matrix::{\"node\":[$file_content]}"
   test:
     needs: build
