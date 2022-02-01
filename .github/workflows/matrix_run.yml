@@ -43,6 +43,6 @@ jobs:
         id: mtx
         run:  |
             "echo ${{matrix.node }}" 
-            if [ ${{matrix.node}} == test2 ] then
+            if [ ${{matrix.node}} == "test2" ] then
                 ls junk
             fi
