@@ -46,11 +46,10 @@ jobs:
         run:  |
             echo "${{matrix.node }} ${{ steps.mtx.outputs.mtx-status }}"
             if [ ${{matrix.node}} == "test2" ] ; then
-                echo "::set-output name=mtx-status::'failed'"
                 ls junk
             fi
       - if: ${{ failure() }}
         run: 
-           echo "failed" 
+           echo "${{matrix.node}} Failed" 
            echo "::set-output name=mtx-status::'failed'"
       
