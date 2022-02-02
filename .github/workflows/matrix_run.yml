@@ -51,6 +51,6 @@ jobs:
             fi
       - if: ${{ failure() }}
         run: 
-           echo "${{ failure()}} failed" 
+           echo "failed" 
            echo "::set-output name=mtx-status::'failed'"
       
