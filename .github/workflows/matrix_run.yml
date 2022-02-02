@@ -45,4 +45,5 @@ jobs:
             echo ${{matrix.node }}
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
+                echo "::set-output name=test-status::failed"
             fi
