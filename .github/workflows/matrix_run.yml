@@ -33,7 +33,6 @@ jobs:
   test:
     env:
        test-stat: start
-       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     needs: build
     runs-on: ubuntu-latest
     strategy:
@@ -47,7 +46,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
-            echo "S: ${{ env.test-stat }}"
+            echo "S: ${{ test.steps.mtx.mtx_status }}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
@@ -56,7 +55,7 @@ jobs:
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx_status::'failed'"
-           echo '::set-env name=test-stat::stop'
+           
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
