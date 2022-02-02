@@ -46,7 +46,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
-            echo "S: ${{ steps.mtx.mtx_status }}"
+            echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
@@ -55,6 +55,7 @@ jobs:
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx_status::'failed'"
+           echo "prev_status=bad" >> $GITHUB_ENV
            
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
