@@ -55,7 +55,7 @@ jobs:
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx_status::'failed'"
-           echo "prev-test=failing" >> $GITHUB_ENV
+           echo '::set-env name=test-stat::stop'
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
