@@ -44,11 +44,7 @@ jobs:
       - name: Run matrix
         id: mtx
         run:  |
-            if [ -f failed_flag ] ; then
-               echo "${{matrix.node }} ${{ steps.mtx.outputs.mtx-status }}"
-               pwd
-            fi
-            ls -l failed_flag
+            echo "Excuting ${{matrix.node }}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
@@ -57,7 +53,6 @@ jobs:
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx-status::'failed'"
-           touch failed_flag
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
