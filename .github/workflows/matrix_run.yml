@@ -46,7 +46,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
-            echo "S: ${{ env.test-stat }}
+            echo "S: ${{ env.test-stat }}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
