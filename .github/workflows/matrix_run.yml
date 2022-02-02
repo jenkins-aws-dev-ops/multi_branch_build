@@ -45,6 +45,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }} $mtx-status"
+            ls .
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
