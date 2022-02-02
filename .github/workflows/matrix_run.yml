@@ -44,9 +44,7 @@ jobs:
       - name: Run matrix
         id: mtx
         run:  |
-            echo "Excuting ${{matrix.node }} ${{ steps.mtx.outputs.mtx_status }}"
-            #echo "$echo "tf_test_working_directory=${{env.tf_test_base}}/${{env.tf_test}}" >> $GITHUB_ENV
-            echo "$GITHUB_ENV"
+            echo "Excuting ${{matrix.node }} ${{ steps.mtx.outputs.mtx_status }} ${{env.prev-test}}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
@@ -55,6 +53,7 @@ jobs:
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx_status::'failed'"
+           echo "prev-test=failing" >> $GITHUB_ENV
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
