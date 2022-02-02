@@ -39,13 +39,12 @@ jobs:
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     outputs:
-      mtx-status: ${{ steps.mtx.outputs.mtx-status }}
+      mtx-status: ${{ steps.mtx.outputs.mtx_status }}
     steps:
       - name: Run matrix
         id: mtx
         run:  |
-            echo "Excuting ${{matrix.node }} $mtx-status"
-            ls /home/runner/work/multi_branch_build/multi_branch_build/
+            echo "Excuting ${{matrix.node }} ${{ mtx-status }}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
@@ -53,7 +52,7 @@ jobs:
         run:  |
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
-           echo "::set-output name=mtx-status::'failed'"
+           echo "::set-output name=mtx_status::'failed'"
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
