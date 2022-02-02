@@ -38,12 +38,14 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
+    outputs:
+      test-status: ${{ steps.mtx.outputs.mtx-status }}
     steps:
       - name: Run matrix
         id: mtx
         run:  |
-            echo ${{matrix.node }}
+            echo "${{matrix.node }} ${{ test-status }}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
-                echo "::set-output name=test-status::failed"
+                echo "::set-output name=mtx-status::failed"
             fi
