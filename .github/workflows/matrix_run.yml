@@ -45,7 +45,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }} $mtx-status"
-            pwd
+            ls /home/runner/work/multi_branch_build/multi_branch_build/
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
