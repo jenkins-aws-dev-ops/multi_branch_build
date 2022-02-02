@@ -53,6 +53,7 @@ jobs:
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx_status::'failed'"
+           touch ${{ runner.temp }}/ttt
            echo "yyy > ${{ runner.temp }}/ttt"
            cat ${{ runner.temp }}/ttt
       - if: ${{ failure() }}
