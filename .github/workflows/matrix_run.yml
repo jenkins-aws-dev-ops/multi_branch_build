@@ -45,8 +45,8 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }} ${{ steps.mtx.outputs.mtx_status }}"
-            fi=`cat ${{ github.workspace }}/.github/workflows/sample`
-            echo "$fi"
+            #echo "$echo "tf_test_working_directory=${{env.tf_test_base}}/${{env.tf_test}}" >> $GITHUB_ENV
+            echo "$GITHUB_ENV"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
