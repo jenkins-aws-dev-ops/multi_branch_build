@@ -45,7 +45,7 @@ jobs:
       - name: Run matrix
         id: mtx
         run:  |
-            echo "Excuting ${{matrix.node }} ${{ steps.mtx.outputs.mtx_status }} ${{env.prev-test}}"
+            echo "Excuting ${{matrix.node }}"
             echo "S: ${{ env.test-stat }}
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
