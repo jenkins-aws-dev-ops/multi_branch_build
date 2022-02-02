@@ -45,7 +45,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }} ${{ steps.mtx.outputs.mtx_status }}"
-            cat ${{ runner.temp }}/ttt
+            cat ${{ runner.temp }}/build_log
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
