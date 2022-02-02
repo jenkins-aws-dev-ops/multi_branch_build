@@ -33,6 +33,7 @@ jobs:
   test:
     env:
        test-stat: start
+       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     needs: build
     runs-on: ubuntu-latest
     strategy:
