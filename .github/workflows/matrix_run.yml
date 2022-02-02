@@ -49,3 +49,6 @@ jobs:
                 echo "::set-output name=mtx-status::'failed'"
                 ls junk
             fi
+            if ${{failure() }}
+               echo "${{failure}}"
+      
