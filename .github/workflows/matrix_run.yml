@@ -48,6 +48,7 @@ jobs:
                echo "${{matrix.node }} ${{ steps.mtx.outputs.mtx-status }}"
                pwd
             fi
+            pwd
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
