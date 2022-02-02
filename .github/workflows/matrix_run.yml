@@ -49,7 +49,13 @@ jobs:
                 ls junk
             fi
       - if: ${{ failure() }}
-        run: 
-           echo "${{matrix.node}} Failed" 
+        run:  |
+           touch ${{ runner.temp }}/build_log
+           echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx-status::'failed'"
+      - if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+            name: build-fail
+            path: ${{ runner.temp }}/build_log
       
