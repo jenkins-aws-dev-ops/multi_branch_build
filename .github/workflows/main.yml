@@ -12,7 +12,6 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -32,27 +31,43 @@ jobs:
            echo "$file_content"
            echo "::set-output name=matrix::{\"node\":[$file_content]}"
   test:
+    env:
+       test-stat: start
     needs: build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
+    outputs:
+      mtx-status: ${{ steps.mtx.outputs.mtx_status }}
     steps:
-      - if: ${{ matrix.node != 'test2' }}
-        run: "echo ${{matrix.node }} echo ${{ env.test-failed }}" 
-      - if: ${{ matrix.node == 'test2' }}
-        run: |
-           sleep 1
-           echo "${{matrix.node}}"
-           touch ${{ runner.temp }}/build_log
-           lines=`echo $$`
-           echo "${{ env.test-failed }} No junk file in ${{ matrix.node }} $lines"  >> ${{ runner.temp }}/build_log
-           ls junk
+      - name: Run matrix
+        uses: actions/download-artifact@v2
+        with:
+           name: build-fail
+        continue-on-error: true
+      - name: Run matrixi
+        id: mtx
+        run:  |
+            echo "Excuting ${{matrix.node }}"
+            if [ -f "previous_test_failed.txt" ]; then
+                cat previous_test_failed.txt
+                exit 1
+            fi
+            if [ ! -f "previous_test_failed.txt" ]; then 
+                echo "Start ${{matrix.node }}"
+                echo "LOAD TERRAFORM"
+            fi
+            if [ ${{matrix.node}} == "test3" ] ; then
+                ls junk
+            fi
+      - if: ${{ failure() }}
+        run:  |
+           touch previous_test_failed
+           echo "failed" >> ${{ runner.temp }}/previous_test_failed.txt
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
-          name: build-fail
-          path: ${{ runner.temp }}/build_log
-          
-      
+            name: build-fail
+            path: ${{ runner.temp }}/
