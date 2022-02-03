@@ -44,11 +44,6 @@ jobs:
     steps:
       - name: Run matrix
         id: mtx
-      - name: Check prev result
-        uses: actions/download-artifact@v2
-        with:
-          name: test-status
-      - name: run indivisual
         run:  |
             echo "Excuting ${{matrix.node }}"
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
