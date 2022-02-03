@@ -42,11 +42,12 @@ jobs:
     outputs:
       mtx-status: ${{ steps.mtx.outputs.mtx_status }}
     steps:
+      - name: Run matrix
+        uses: actions/download-artifact@v2
+        with:
+            name: build-fail
       - name: Run matrixi
         id: mtx
-      - uses: actions/download-artifact@v2
-          with:
-            name: build-fail
         run:  |
             echo "Excuting ${{matrix.node }}"
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
