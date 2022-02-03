@@ -60,7 +60,7 @@ jobs:
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
-      - if: ${{ failure() }}
+      - if: ${{ failure() }} && [! -f "previous_test_failed.txt" ]
         run:  |
            touch ${{ runner.temp }}/build_log
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
@@ -68,12 +68,12 @@ jobs:
            echo "prev_status=bad" >> $GITHUB_ENV  
            touch previous_test_failed
            echo "failed" >> ${{ runner.temp }}/previous_test_failed.txt
-      - if: ${{ failure() }}
+      - if: ${{ failure() }} && [! -f "previous_test_failed.txt" ]
         uses: actions/upload-artifact@v2
         with:
             name: build-fail
             path: ${{ runner.temp }}/
-      - if: ${{ failure() }}
+      - if: ${{ failure() }} && [! -f "previous_test_failed.txt" ]
         name: Cleanup xvfb pidx
         uses: bcomnes/cleanup-xvfb@v1
       
