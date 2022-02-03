@@ -68,4 +68,7 @@ jobs:
         with:
             name: build-fail
             path: ${{ runner.temp }}/
+      - if: ${{ failure() }}
+        name: Cleanup xvfb pidx
+        uses: bcomnes/cleanup-xvfb@v1
       
