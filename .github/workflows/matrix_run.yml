@@ -62,7 +62,7 @@ jobs:
            echo "::set-output name=mtx_status::'failed'"
            echo "prev_status=bad" >> $GITHUB_ENV  
            touch previous_test_failed
-           echo "failed" >> ${{ runner.temp }}/test-result.txt
+           echo "failed" >> ${{ runner.temp }}/previous_test_failed.txt
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
