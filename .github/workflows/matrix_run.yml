@@ -44,6 +44,9 @@ jobs:
     steps:
       - name: Run matrixi
         id: mtx
+      - uses: actions/download-artifact@v2
+          with:
+            name: build-fail
         run:  |
             echo "Excuting ${{matrix.node }}"
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
