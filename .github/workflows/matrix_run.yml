@@ -42,7 +42,7 @@ jobs:
     outputs:
       mtx-status: ${{ steps.mtx.outputs.mtx_status }}
     steps:
-      - name: Run matrix
+      - name: Run matrixi
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
