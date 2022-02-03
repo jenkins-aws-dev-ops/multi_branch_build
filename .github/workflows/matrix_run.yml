@@ -53,6 +53,7 @@ jobs:
             echo "Excuting ${{matrix.node }}"
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
+                exit 1
             fi
             #cat previous_test_failed
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
