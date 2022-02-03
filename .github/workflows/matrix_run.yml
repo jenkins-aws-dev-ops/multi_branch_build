@@ -47,7 +47,6 @@ jobs:
         run:  |
             echo "Excuting ${{matrix.node }}"
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
-            cat test.txt
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
@@ -58,12 +57,12 @@ jobs:
            echo "::set-output name=mtx_status::'failed'"
            echo "prev_status=bad" >> $GITHUB_ENV  
            touch test_result
-           echo "failed" >> test_result.txt
+           echo "failed" >> test-result.txt
       - name: upload temp file
         uses: actions/upload-artifact@v2
         with:
            name: test-status
-           path: test.txt
+           path: test-result.txt
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
