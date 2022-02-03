@@ -50,7 +50,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
-            cat test-result.txt
+            ls -l previous_test_failed
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
@@ -61,13 +61,8 @@ jobs:
            echo "${{matrix.node}} Failed" >> ${{ runner.temp }}/build_log
            echo "::set-output name=mtx_status::'failed'"
            echo "prev_status=bad" >> $GITHUB_ENV  
-           touch test_result
+           touch previous_test_failed
            echo "failed" >> ${{ runner.temp }}/test-result.txt
-      #- name: upload temp file
-        #uses: actions/upload-artifact@v2
-        #with:
-           #name: test-status
-           #path: ${{ runner.temp }}/test-result.txt
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
