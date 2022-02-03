@@ -50,7 +50,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
-            ls -l previous_test_failed
+            cat previous_test_failed
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
