@@ -51,6 +51,9 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
+            if [ -f "previous_test_failed.txt" ]; then
+                cat previous_test_failed.txt
+            fi
             #cat previous_test_failed
             echo "S: ${{ steps.mtx.mtx_status }} ${{env.prev_status}}"
             if [ ${{matrix.node}} == "test2" ] ; then
