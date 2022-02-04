@@ -63,9 +63,8 @@ jobs:
                 ls junk
             fi
       - name: Check status
-        if: ${{ failure() }} 
-        run: |
-            uses: actions/upload-artifact@v2
-            with:
-               name: build-fail
-               path: ${{ runner.temp }}/
+      - if: ${{ failure() }} 
+        uses: actions/upload-artifact@v2
+        with:
+           name: build-fail
+           path: ${{ runner.temp }}/
