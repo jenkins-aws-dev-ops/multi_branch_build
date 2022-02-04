@@ -27,7 +27,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - id: set-matrix
         run: | 
-           file_content=`cat ${{ github.workspace }}/.github/workflows/sample.json | jq ".builds.nightly.tests"`
+           file_content=`cat ${{ github.workspace }}/.github/workflows/sample.json | jq ".builds.nightly.tests | tr -d"`
            echo ">{\"node\":$file_content}<"
            #echo "::set-output name=matrix::{\"node\":[$file_content]}"
            echo "::set-output name=matrix::{\"node\":$file_content}"
@@ -39,9 +39,7 @@ jobs:
     strategy:
       fail-fast: false
       max-parallel: 1
-      #matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
-      matrix: 
-         tests: [ "test1", "test2"]
+      matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     outputs:
       mtx-status: ${{ steps.mtx.outputs.mtx_status }}
     steps:
