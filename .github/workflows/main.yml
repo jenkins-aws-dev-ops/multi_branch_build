@@ -62,7 +62,6 @@ jobs:
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
-      - name: Check status
       - if: ${{ failure() }} 
         uses: actions/upload-artifact@v2
         with:
