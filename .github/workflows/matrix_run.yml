@@ -30,7 +30,7 @@ jobs:
            #file_content=`cat ${{ github.workspace }}/.github/workflows/sample`
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample.json | jq ".builds.nightly.tests" | tr -d '\n'`
            echo "$file_content"
-           echo "::set-output name=matrix::{\"node\":[$file_content]}"
+           #echo "::set-output name=matrix::{\"node\":[$file_content]}"
            echo "::set-output name=matrix::{\"tests\":$file_content}"
   test:
     env:
