@@ -62,8 +62,13 @@ jobs:
             if [ ${{matrix.node}} == "test2" ] ; then
                 ls junk
             fi
-      - if: ${{ failure() }} 
+      - if: ${{ failure() }}
+        run:  | 
+           touch previous_test_failed
+           echo "failed" >> ${{ runner.temp }}/previous_test_failed.txt
+      - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
-           name: build-fail
-           path: ${{ runner.temp }}/
+            name: build-fail
+            path: ${{ runner.temp }}/
+      
