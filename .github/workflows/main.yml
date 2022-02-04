@@ -39,7 +39,11 @@ jobs:
     strategy:
       fail-fast: false
       max-parallel: 1
-      matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
+      #matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
+      matrix: [
+                "test1",
+                "test2"
+              ]
     outputs:
       mtx-status: ${{ steps.mtx.outputs.mtx_status }}
     steps:
