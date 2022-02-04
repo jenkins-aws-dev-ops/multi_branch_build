@@ -70,5 +70,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: build-fail
-            path: ${{ runner.temp }}/
+            path: ${{ runner.temp }}/${{matrix.node }}
       
