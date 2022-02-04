@@ -52,6 +52,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{matrix.node }}"
+            sleep 10
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
                 exit 1
