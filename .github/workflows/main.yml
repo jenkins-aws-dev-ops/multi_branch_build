@@ -28,7 +28,7 @@ jobs:
       - id: set-matrix
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample.json | jq ".builds.nightly.tests"`
-           echo ">$file_content {\"node\":$file_content}<"
+           echo ">{\"node\":$file_content}<"
            #echo "::set-output name=matrix::{\"node\":[$file_content]}"
            echo "::set-output name=matrix::{\"node\":$file_content}"
   test:
