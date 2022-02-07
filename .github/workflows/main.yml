@@ -18,10 +18,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
       uses: actions/checkout@v2
     steps: 
-      - name: test1
-        id: set-matrix
-        uses: actions/checkout@v2
       - name: Parse test input file
+        id: set-matrix
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample.json | jq ".builds.nightly.tests" | tr -d '\n'`
            echo "::set-output name=matrix::{\"node\":$file_content}"
