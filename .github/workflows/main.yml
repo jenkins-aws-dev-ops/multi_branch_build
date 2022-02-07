@@ -22,7 +22,7 @@ jobs:
         id: set-matrix
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample.json | jq ".builds.nightly.tests" | tr -d '\n'`
-           echo "Prepare matrix with: ${{file_content}}"
+           echo "Prepare matrix with: $file_content"
            echo "::set-output name=matrix::{\"tests\":$file_content}"
   test:
     env:
