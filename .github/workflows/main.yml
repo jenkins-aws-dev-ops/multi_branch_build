@@ -22,7 +22,8 @@ jobs:
         id: set-matrix
         run: | 
            file_content=`cat ${{ github.workspace }}/.github/workflows/sample.json | jq ".builds.nightly.tests" | tr -d '\n'`
-           echo "::set-output name=matrix::{\"node\":$file_content}"
+           echo "Prepare matrix with: ${{file_content}}"
+           echo "::set-output name=matrix::{\"tests\":$file_content}"
   test:
     env:
        test-stat: start
@@ -50,16 +51,16 @@ jobs:
                 exit 1
             fi
             if [ ! -f "previous_test_failed.txt" ]; then 
-                echo "Start ${{matrix.node }}"
+                echo "Start ${{matrix.tests }}"
                 echo "LOAD TERRAFORM"
             fi
-            if [ ${{matrix.node}} == "test2" ] ; then
+            if [ ${{matrix.tests}} == "test2" ] ; then
                 ls junk
             fi
       - if: ${{ failure() }}
         run:  | 
            touch previous_test_failed
-           echo "${{matrix.node }} failed" >> ${{ runner.temp }}/previous_test_failed.txt
+           echo "${{matrix.tests }} failed" >> ${{ runner.temp }}/previous_test_failed.txt
       - if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
