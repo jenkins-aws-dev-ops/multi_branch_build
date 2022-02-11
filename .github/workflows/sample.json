@@ -1,9 +1,5 @@
 {
-	"builds": {
-		"nightly": {
-			"tests": [
-				"test1", "test2", "test3", "test4"
-			]
-		}
-	}
+	"tests": [
+		"transit_solution_with_ha"
+	]
 }
