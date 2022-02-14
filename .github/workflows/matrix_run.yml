@@ -49,16 +49,16 @@ jobs:
       - name: Run matrixi
         id: mtx
         run:  |
-            echo "Excuting ${{matrix.tests }}"
+            echo "Excuting ${matrix.tests}"
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
                 exit 1
             fi
             if [ ! -f "previous_test_failed.txt" ]; then 
-                echo "Start ${{matrix.tests }}"
+                echo "Start ${matrix.tests}"
                 echo "LOAD TERRAFORM"
             fi
-            if [ ${{matrix.tests}} == "test2" ] ; then
+            if [ ${matrix.tests} == "test2" ] ; then
                 ls junk
             fi
       - if: ${{ failure() }}
