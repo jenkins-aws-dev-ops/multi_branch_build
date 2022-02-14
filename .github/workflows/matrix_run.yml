@@ -49,7 +49,7 @@ jobs:
       - name: Run matrixi
         id: mtx
         run:  |
-            echo "Excuting ${matrix.tests}"
+            echo "Excuting ${{ matrix.tests }}"
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
                 exit 1
