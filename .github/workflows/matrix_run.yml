@@ -37,7 +37,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true
       max-parallel: 1
       matrix: ${{fromJSON(needs.build.outputs.matrix)}} 
     steps:
@@ -58,7 +58,7 @@ jobs:
                 echo "Start ${{ matrix.tests }}"
                 echo "LOAD TERRAFORM"
             fi
-            if [ ${{ matrix.tests }} == "test2" ] ; then
+            if [ ${{ matrix.tests }} == "test3" ] ; then
                 ls junk
             fi
       - if: ${{ failure() }}
