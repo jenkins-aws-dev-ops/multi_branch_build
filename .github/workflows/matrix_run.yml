@@ -69,5 +69,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: build-fail
-            path: ${{ runner.temp }}/
+            path: ${{ runner.temp }}
+            
+  reports:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print report
+        id: print-report
+        run:  |
+           echo "Hello"
       
