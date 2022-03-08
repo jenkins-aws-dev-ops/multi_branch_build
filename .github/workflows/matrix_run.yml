@@ -50,6 +50,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{ matrix.tests }}"
+            echo "Debug.... ${{ matrix.tests }} "
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
                 exit 1
