@@ -58,7 +58,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{ matrix.tests }}"
-            if [ !-f "setup.txt" ]; then
+            if [ ! -f "setup.txt" ]; then
                echo "Debug setup .... ${{ matrix.tests }} "
                cat setup.txt
             fi
