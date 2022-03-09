@@ -50,7 +50,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{ matrix.tests }}"
-            if [ ${{ env.set-up-test == "" ]; then
+            if [ ${{ env.set-up-test == " " ]; then
                echo "Debug.... ${{ matrix.tests }} "
                echo "set-up-test=true" >> GITHUB_ENV"
             fi
