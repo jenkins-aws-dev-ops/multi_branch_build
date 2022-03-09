@@ -60,7 +60,6 @@ jobs:
             echo "Excuting ${{ matrix.tests }}"
             if [ ! -f "setup.txt" ]; then
                echo "Debug setup .... ${{ matrix.tests }} "
-               cat setup.txt
             fi
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
