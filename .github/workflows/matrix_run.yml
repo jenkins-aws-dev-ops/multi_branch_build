@@ -53,7 +53,7 @@ jobs:
             echo "Excuting ${{ matrix.tests }}"
             if [ ${{ env.set-up-test }} = "false" ]; then
                echo "Debug.... ${{ matrix.tests }} "
-               echo "set-up-test=true" >> GITHUB_ENV"
+               echo "set-up-test=true" >> GITHUB_ENV
             fi
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
