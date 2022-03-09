@@ -63,7 +63,7 @@ jobs:
                 echo "Start ${{ matrix.tests }}"
                 echo "LOAD TERRAFORM"
             fi
-            if [ ${{ matrix.tests }} == "test3" ] ; then
+            if [ ${{ matrix.tests }} == "test1" ] ; then
                 ls junk
             fi
       - if: ${{ failure() }}
