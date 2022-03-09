@@ -47,13 +47,22 @@ jobs:
         with:
            name: build-fail
         continue-on-error: true
+        
+      - name: Check setup
+        uses: actions/download-artifact@v2
+        with:
+           name: setup
+        continue-on-error: true
+        
       - name: Run matrixi
         id: mtx
         run:  |
             echo "Excuting ${{ matrix.tests }}"
             if [ ${{ env.set-up-test }} == "false" ]; then
-               echo "Debug.... ${{ matrix.tests }} -> ${{ env.set-up-test }} "
-               echo "set-up-test=true" >> GITHUB_ENV
+               echo "Debug.... ${{ matrix.tests }} "
+            fi
+            if [ -f "setup.txt" ]; then
+                cat setup.txt
             fi
             if [ -f "previous_test_failed.txt" ]; then
                 cat previous_test_failed.txt
@@ -66,6 +75,13 @@ jobs:
             if [ ${{ matrix.tests }} == "test3" ] ; then
                 ls junk
             fi
+            echo "done" >> ${{ runner.temp }}/setup.txt
+      - name: Setup verification 
+        uses: actions/upload-artifact@v2
+        with:
+            name: setup
+            path: ${{ runner.temp }}/setup.txt
+            
       - if: ${{ failure() }}
         run:  |
            touch previous_test_failed
