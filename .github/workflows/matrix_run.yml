@@ -62,6 +62,7 @@ jobs:
                echo "Debug.... ${{ matrix.tests }} "
             fi
             if [ -f "setup.txt" ]; then
+                pwd
                 cat setup.txt
             fi
             if [ -f "previous_test_failed.txt" ]; then
