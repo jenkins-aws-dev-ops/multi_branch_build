@@ -34,6 +34,7 @@ jobs:
   test:
     env:
        test-stat: start
+       set-up-test: false
     needs: build
     runs-on: ubuntu-latest
     strategy:
@@ -50,7 +51,7 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{ matrix.tests }}"
-            if [ !${{ env.set-up-test }} ]; then
+            if [ ${{ env.set-up-test }} = "false" ]; then
                echo "Debug.... ${{ matrix.tests }} "
                echo "set-up-test=true" >> GITHUB_ENV"
             fi
