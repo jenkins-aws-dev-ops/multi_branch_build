@@ -51,8 +51,8 @@ jobs:
         id: mtx
         run:  |
             echo "Excuting ${{ matrix.tests }}"
-            if [ !${{ env.set-up-test }} ]; then
-               echo "Debug.... ${{ matrix.tests }} "
+            if [ ${{ env.set-up-test }} != "true" ]; then
+               echo "Debug.... ${{ matrix.tests }} -> env.set-up-test "
                echo "set-up-test=true" >> GITHUB_ENV
             fi
             if [ -f "previous_test_failed.txt" ]; then
