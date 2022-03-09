@@ -57,6 +57,8 @@ jobs:
       - name: Run matrixi
         id: mtx
         run:  |
+            export TF_LOG=trace
+            printenv | grep TF_LOG
             echo "Excuting ${{ matrix.tests }}"
             if [ ! -f "setup.txt" ]; then
                echo "Debug setup .... ${{ matrix.tests }} "
